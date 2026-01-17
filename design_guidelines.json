@@ -1,0 +1,147 @@
+{
+  "identity": {
+    "name": "HydroFlow",
+    "persona": "E1 - The Anti-AI Designer",
+    "vibe": "Clean Industrial & Automotive Luxury",
+    "principles": [
+      "Fusion: Automotive Precision + Fluid Dynamics",
+      "Emotion: Trust, Efficiency, Clarity",
+      "Content: Data is beautiful, status is clear",
+      "Contrast: High-vis accents against clean backgrounds"
+    ]
+  },
+  "typography": {
+    "headings": {
+      "family": "Outfit, sans-serif",
+      "weights": ["500", "700"],
+      "usage": "All section headers, modal titles, and KPI values"
+    },
+    "body": {
+      "family": "Inter, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "General text, table data, form inputs"
+    },
+    "imports": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#0066FF",
+        "foreground": "#FFFFFF",
+        "description": "Electric Blue - Represents water, cleaning, and tech"
+      },
+      "secondary": {
+        "DEFAULT": "#FF6600",
+        "foreground": "#FFFFFF",
+        "description": "Safety Orange - Used for 'Book Now', 'Action Required', or high-priority status"
+      },
+      "background": "#F8FAFC",
+      "surface": "#FFFFFF",
+      "text": {
+        "primary": "#0F172A",
+        "secondary": "#64748B"
+      },
+      "status": {
+        "success": "#10B981",
+        "warning": "#F59E0B",
+        "error": "#EF4444",
+        "info": "#3B82F6"
+      }
+    },
+    "gradients": {
+      "hero": "linear-gradient(135deg, #0066FF 0%, #0EA5E9 100%)",
+      "glass": "linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%)"
+    }
+  },
+  "layout": {
+    "grid_system": {
+      "dashboard": "grid-cols-1 md:grid-cols-12 gap-6",
+      "cards": "grid-cols-1 md:grid-cols-3 gap-6"
+    },
+    "spacing": {
+      "container_padding": "p-6 md:p-8",
+      "section_gap": "gap-8"
+    },
+    "structure": {
+      "sidebar": "Fixed width (240px), collapsible on mobile",
+      "header": "Sticky top, glassmorphism effect",
+      "main": "Scrollable area with max-width constraints for readability"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 rounded-full px-6",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full px-6",
+      "ghost": "hover:bg-slate-100 text-slate-700"
+    },
+    "cards": {
+      "style": "bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 rounded-xl",
+      "glass": "backdrop-blur-xl bg-white/70 border border-white/20 shadow-xl"
+    },
+    "inputs": {
+      "style": "bg-slate-50 border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-lg"
+    },
+    "status_badges": {
+      "style": "px-2.5 py-0.5 rounded-full text-xs font-medium uppercase tracking-wide"
+    }
+  },
+  "visual_enhancers": {
+    "shadows": {
+      "soft": "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+      "glow": "0 0 20px rgba(0, 102, 255, 0.3)"
+    },
+    "borders": {
+      "subtle": "1px solid #E2E8F0",
+      "highlight": "1px solid #0066FF"
+    },
+    "radius": {
+      "default": "0.75rem",
+      "button": "9999px"
+    }
+  },
+  "media": {
+    "images": {
+      "login_bg": {
+        "url": "https://images.unsplash.com/photo-1739161763817-a03b931585da?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBjYXIlMjBkZXRhaWxpbmclMjBzdHVkaW98ZW58MHx8fHwxNzY3MDIxNTM5fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Luxury Car in Studio",
+        "usage": "Full screen background for login page with overlay"
+      },
+      "dashboard_texture": {
+        "url": "https://images.unsplash.com/photo-1641853667137-745cb3663f80?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzl8MHwxfHNlYXJjaHwxfHxibHVlJTIwd2F0ZXIlMjBidWJibGVzJTIwdGV4dHVyZXxlbnwwfHx8fDE3NjcwMjE1NDB8MA&ixlib=rb-4.1.0&q=85",
+        "alt": "Blue Water Texture",
+        "usage": "Subtle header background or card accent"
+      },
+      "placeholder_product": {
+        "url": "https://images.unsplash.com/photo-1739161763834-714da069ae29?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBjYXIlMjBkZXRhaWxpbmclMjBzdHVkaW98ZW58MHx8fHwxNzY3MDIxNTM5fDA&ixlib=rb-4.1.0&q=85",
+        "alt": "White Jeep",
+        "usage": "Default image for products/services if none provided"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "Stroke width 1.5px, rounded joins"
+    }
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL FONTS: Add the Google Fonts import to the top of /app/frontend/src/index.css immediately.",
+    "2. UPDATE TAILWIND: Update tailwind.config.js to include the new colors (primary: #0066FF, secondary: #FF6600) and fonts (Outfit, Inter).",
+    "3. USE SHADCN: Utilize the existing components in /app/frontend/src/components/ui/. They are .jsx files.",
+    "4. FILE EXTENSIONS: Use .js for pages and logic, but .jsx is acceptable for components if that is the project pattern. The existing UI components are .jsx.",
+    "5. LAYOUT: Implement a 'DashboardLayout' component that includes the Sidebar and Header, and wraps the page content.",
+    "6. AUTH: Create a 'ProtectedLayout' for routes requiring login.",
+    "7. DATA-TESTID: Add data-testid attributes to all interactive elements (buttons, inputs, links) for testing.",
+    "8. THEME: Default to Light Mode. Use the 'dark' class for dark mode if implemented, but focus on a polished Light Mode first.",
+    "9. PDF: Use 'jspdf' and 'jspdf-autotable' for client-side invoice generation.",
+    "10. NOTIFICATIONS: Use 'sonner' for toast notifications (already in ui components)."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Avoid generic 'AI slop' designs. Use generous spacing (p-6, p-8).",
+    "Do not use gradients for text unless it's a very large hero title.",
+    "Ensure high contrast for text. No gray-on-gray.",
+    "Use 'lucide-react' for icons.",
+    "Components must use named exports.",
+    "Pages must use default exports."
+  ]
+}

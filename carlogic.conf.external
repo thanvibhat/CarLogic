@@ -1,0 +1,88 @@
+# Apache VirtualHost Configuration for CarLogic - Production (External Network Access)
+# Place this file at:
+#   Linux: /etc/apache2/sites-available/carlogic.conf
+#   Windows: C:\Apache24\conf\extra\carlogic.conf
+
+# Replace HOSTNAME and IP_ADDRESS with your actual values
+# Example:
+#   ServerName carlogic.example.com
+#   ServerAlias 192.168.1.100 carlogic.local
+
+<VirtualHost *:80>
+    # Configure for your network
+    ServerName carlogic.local
+    ServerAlias localhost 127.0.0.1 carlogic
+    
+    # IMPORTANT: Update DocumentRoot to the actual path
+    # Linux example: /var/www/carlogic/frontend/build
+    # Windows example: C:/Apache/carlogic/frontend/build or C:/Users/USERNAME/path/to/frontend/build
+    DocumentRoot "/var/www/carlogic/frontend/build"
+
+    # Serve static frontend files
+    <Directory "/var/www/carlogic/frontend/build">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+        
+        # React Router: Route all non-file requests to index.html
+        <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteBase /
+            RewriteRule ^index\.html$ - [L]
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule . /index.html [L]
+        </IfModule>
+    </Directory>
+
+    # Reverse proxy for API requests to FastAPI backend
+    # For Docker Compose: use 'backend' (internal Docker DNS)
+    # For manual setup on same machine: use 'localhost:8000'
+    # For remote backend: use the actual IP or hostname of backend server
+    <Location /api>
+        ProxyPass http://backend:8000/api
+        ProxyPassReverse http://backend:8000/api
+        
+        # Headers for proper proxying
+        ProxyPreserveHost On
+        RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-Proto http
+        RequestHeader set X-Forwarded-Host %{HTTP_HOST}s
+        RequestHeader set X-Forwarded-Port 80
+    </Location>
+
+    # WebSocket proxy (if needed)
+    <Location /ws>
+        ProxyPass ws://backend:8000/ws
+        ProxyPassReverse ws://backend:8000/ws
+        ProxyPreserveHost On
+    </Location>
+
+    # Logging - adjust paths for your system
+    ErrorLog "|/usr/bin/tee /var/log/apache2/carlogic_error.log"
+    CustomLog "|/usr/bin/tee /var/log/apache2/carlogic_access.log" combined
+
+    # Compression for better performance
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+    </IfModule>
+
+    # Browser caching for static assets
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType image/* "access plus 1 year"
+        ExpiresByType text/css "access plus 1 year"
+        ExpiresByType text/javascript "access plus 1 year"
+        ExpiresByType application/javascript "access plus 1 year"
+        ExpiresByType font/* "access plus 1 year"
+        ExpiresByType application/font-woff "access plus 1 year"
+        ExpiresByType application/font-woff2 "access plus 1 year"
+    </IfModule>
+
+    # Disable caching for index.html
+    <FilesMatch "^index\.html$">
+        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</VirtualHost>
